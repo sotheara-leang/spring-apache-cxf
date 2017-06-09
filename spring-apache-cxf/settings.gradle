@@ -1,0 +1,3 @@
+rootProject.name = 'spring-apache-cxf'
+
+includeFlat 'spring-apache-cxf-server', 'spring-apache-cxf-client'

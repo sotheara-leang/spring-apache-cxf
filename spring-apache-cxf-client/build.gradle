@@ -1,0 +1,36 @@
+buildscript {
+
+	repositories { 
+    	jcenter()
+ 	}
+
+  	dependencies {
+    	classpath 'com.github.jacobono:gradle-wsdl-plugin:1.7.8'
+  	}
+}
+
+apply plugin: 'com.github.jacobono.wsdl'
+
+dependencies { 
+	jaxws 'com.sun.xml.ws:jaxws-tools:2.2.8-promoted-b131'
+   	jaxws 'com.sun.xml.ws:jaxws-rt:2.2.8-promoted-b131'
+}
+
+wsdl {
+	wsdlFolder		= "wsdl"
+	schemaFolder	= "schema"
+	episodeFolder = "schema/episodes"
+	nameRules     = [:]
+	episodes      = []
+	wsimport {
+    	sourceDestinationDirectory = "src/main/java/com/example/springcxf/client"
+    	verbose		= true
+   		keep		= true	
+    	xnocompile	= true
+    	fork		= false
+    	xadditionalHeaders  = false
+    	xdebug		= false
+    	target		= "2.1"
+    	wsdlLocation = "http://localhost:8080/spring-apache-cxf-server/soap/userService?wsdl=UserWebService.wsdl"
+	}
+}

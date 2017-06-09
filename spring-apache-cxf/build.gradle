@@ -1,0 +1,65 @@
+ buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'io.spring.gradle:dependency-management-plugin:1.0.0.RELEASE'
+    }
+}
+
+apply plugin: 'eclipse'
+
+subprojects {
+	
+    apply plugin: 'java'
+    apply plugin: 'eclipse-wtp'
+	apply plugin: 'io.spring.dependency-management'
+	    
+	ext {
+		jdkVersion = 1.8
+		projectVersion = '0.1'
+	}
+	
+    sourceCompatibility = jdkVersion
+    targetCompatibility = jdkVersion
+    
+    version = projectVersion
+
+    repositories {
+       jcenter()
+    }
+	
+	dependencyManagement {
+	    imports {
+	        mavenBom 'io.spring.platform:platform-bom:Brussels-SR2'
+	    }
+	}
+	
+    dependencies {
+    	// logging
+		compile('log4j:log4j') {
+	        exclude module: 'javax.mail:mail'
+	        exclude module: 'javax.jms:jms'
+	        exclude module: 'com.sun.jdmk:jmxtools'
+	        exclude module: 'com.sun.jmx:jmxri'
+	    }
+	    compile 'org.slf4j:slf4j-api'
+	    compile 'org.slf4j:jcl-over-slf4j'
+	    compile 'org.slf4j:slf4j-log4j12'
+	    
+	    // spring
+		compile('org.springframework:spring-context') {
+	        exclude module: 'commons-logging:commons-logging'
+	    }
+		compile 'org.springframework:spring-webmvc' 
+	
+    	// test
+        testCompile 'junit:junit:4.12'
+        testCompile 'org.springframework:spring-test'
+        
+         // apache cxf
+    	compile 'org.apache.cxf:cxf-rt-frontend-jaxws:3.1.11'
+    	compile 'org.apache.cxf:cxf-rt-transports-http:3.1.11'
+    }
+}
+
