@@ -9,4 +9,7 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
    	
+   	<jaxws:client id="userEndpoint"
+   		serviceClass="com.example.springcxf.client.endpoint.user.UserWebService"
+   		address="http://localhost:8080/spring-apache-cxf-server/soap/UserService" />
 </beans>

@@ -12,6 +12,6 @@
 	<jaxws:endpoint
        id="userWebService"
        implementor="com.example.springcxf.server.endpoint.impl.UserWebServiceImpl"
-       address="/userService" />
+       address="/UserService" />
    	
 </beans>
